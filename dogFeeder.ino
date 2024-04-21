@@ -37,37 +37,49 @@ bool isAlertDisplayed = false; // Flag to indicate if alert message is displayed
 
 void setup() {
   // Initialize the tilt sensor, LEDs, ultrasonic sensor, and servo motor
-  pinMode(tiltSensorPin, INPUT_PULLUP); // Using internal pull-up resistor
-  pinMode(greenLedPin, OUTPUT);
-  pinMode(redLedPin, OUTPUT);
+  intLeds();
+  intServo();
+  intLCD();
+  intTilt();
+  intultraSonic();
+ 
+}
+void intultraSonic() {
   pinMode(ultrasonicTrigPin, OUTPUT);
   pinMode(ultrasonicEchoPin, INPUT);
-  pinMode(whiteLedPin, OUTPUT); // Initialize white LED pin
-  pinMode(blueLedPin, OUTPUT); // Initialize blue LED pin
+}
+void intTilt() {
+  pinMode(tiltSensorPin, INPUT_PULLUP);
+}
+void intLeds() {
+  // pins LED
+  pinMode(greenLedPin, OUTPUT); // GREEN
+  pinMode(redLedPin, OUTPUT); // RED
+  pinMode(whiteLedPin, OUTPUT); // WHITE
+  pinMode(blueLedPin, OUTPUT); // BLUE
+  pinMode(redAlertPin, OUTPUT); // Alert RED
+  // Turn on blue LED
+  digitalWrite(blueLedPin, HIGH); 
+}
+void intServo() {
   pinMode(servoPin, OUTPUT); // Initialize servo pin
-  
   // Attach servo to its pin
   servo.attach(servoPin);
-
-  // Initialize the LCD with the specified dimensions
-  lcd.begin(lcdColumns, lcdRows);
-
-  // Display a message
-  lcd.print("DOG FEEDER  v1.7");
-
-  // Set up the contrast pin as an output
-  pinMode(contrastPin, OUTPUT);
-
   // Ensure the servo is at 0 degrees on startup
   servo.write(0);
-
-  // Turn on blue LED
-  digitalWrite(blueLedPin, HIGH);
-
-  // Define red alert pin as output
-  pinMode(redAlertPin, OUTPUT);
 }
-
+void intLCD() {
+  // Initialize the LCD with the specified dimensions
+  lcd.begin(lcdColumns, lcdRows);
+  // Set up the contrast pin as an output
+  pinMode(contrastPin, OUTPUT);
+  // Display a message
+  lcd.print("DOG FEEDER  v1.7");
+}
+void displayMessage (String message, int column, int line){
+     lcd.setCursor(column, line);
+      lcd.print(message);
+     }
 void loop() {
   // Check if sensor is tilted up (on)
   int sensorValue = digitalRead(tiltSensorPin);
@@ -109,11 +121,8 @@ void loop() {
       servo.write(90); // Move servo to 90 degrees
       digitalWrite(whiteLedPin, HIGH); // Turn on white LED
       lcd.clear();
-      lcd.setCursor(0, 0);
-      lcd.print("Serving  portion");
-      lcd.setCursor(4, 1);
-      lcd.print("of 110g");
-    
+      displayMessage ("Serving  portion", 0, 0);
+      displayMessage ("of 110g", 4, 1);
       // Delay for 1.5 seconds after object detection (Servo stays open for 1.5 seconds)
       delay(1500);
     
@@ -123,15 +132,12 @@ void loop() {
       servo.write(0); // Move servo to 0 degrees
       digitalWrite(whiteLedPin, LOW); // Turn off white LED
       lcd.clear();
-      lcd.setCursor(1, 0);
-      lcd.print("Take your bowl"); // Display "Buon appetito!" message
-      lcd.setCursor(1, 1);
-      lcd.print("Buon appetito!"); // Display "Buon appetito!" message
+      displayMessage ("Take your bowl", 1, 0); // Display "Take your bowl" message
+      displayMessage ("Buon appetito!", 1, 1);// Display "Buon appetito!" message
       // Delay for 2.5 seconds before reverting to the initial message
       delay(2500);
       lcd.clear();
-      lcd.setCursor(0, 0);
-      lcd.print("Place your bowl.");
+      displayMessage ("Place your bowl.", 0, 0);
     } else {
       // If serving and 1.8 seconds have passed, close the servo
       if (ultrasonicTriggered && millis() - servingStartTime >= 1800) {
@@ -140,8 +146,7 @@ void loop() {
         servo.write(0); // Move servo to 0 degrees
         digitalWrite(whiteLedPin, LOW); // Turn off white LED
         lcd.clear();
-        lcd.setCursor(0, 0);
-        lcd.print("Place your bowl.");
+        displayMessage ("Place your bowl.", 0, 0);
       }
     }
     
@@ -165,29 +170,23 @@ void loop() {
     if (!isAlertDisplayed) {
       // Display alert message
       lcd.clear();
-      lcd.setCursor(4, 0);
-      lcd.print("WARNING!");
-      lcd.setCursor(1, 1);
-      lcd.print("Put more food.");
-      
+      displayMessage ("WARNING!", 4, 0);
+      displayMessage ("Put more food.", 1, 1);
       isAlertDisplayed = true;
     }
     
     // Flicker the red LED when the system is off temporarily
     for (int i = 0; i < 5; i++) {
-      digitalWrite(redAlertPin, HIGH); // Turn on the red LED
-      delay(700); // Delay for flickering effect
+      digitalWrite(blueLedPin, LOW); // Turn off blue LED when system is down
+      delay(300); // Delay for flickering effect
       digitalWrite(redAlertPin, LOW); // Turn off the red LED
       delay(300); // Delay for flickering effect
       digitalWrite(redAlertPin, HIGH); // Turn off the red LED
-      delay(700); // Delay for flickering effect
-      digitalWrite(redAlertPin, LOW); // Turn off the red LED
+      delay(300); // Delay for flickering effect
+       digitalWrite(redAlertPin, LOW); // Turn off the red LED
       delay(1000); // Delay for flickering effect
     }
-    
-    // Turn off blue LED when system is down
-    digitalWrite(blueLedPin, LOW); // Turn off blue LED
-    
-    // Add any additional actions you want to perform when the system is down
   }
+
 }
+ 
