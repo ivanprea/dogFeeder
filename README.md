@@ -46,3 +46,6 @@ Cathode (short leg) to a current-limiting resistor (usually 220 ohms), then conn
  - D4, D5, D6, and D7 pins to digital pins 10, 11, 12, and 13 respectively (d4, d5, d6, d7).
  - Contrast Potentiometer:
  - Connect one outer pin of the potentiometer to 5V and the other outer pin to ground (GND).
+
+
+![Wiring](https://github.com/ivanprea/dogFeeder/assets/78477048/0286765a-400e-4b2f-8d17-e63246a9794c)
