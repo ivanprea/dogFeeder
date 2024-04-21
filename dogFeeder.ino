@@ -1,3 +1,5 @@
+// DOG FEEDER
+
 #include <Servo.h>
 #include <LiquidCrystal.h>
 
