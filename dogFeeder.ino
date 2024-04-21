@@ -42,7 +42,6 @@ void setup() {
   intLCD();
   intTilt();
   intultraSonic();
- 
 }
 void intultraSonic() {
   pinMode(ultrasonicTrigPin, OUTPUT);
