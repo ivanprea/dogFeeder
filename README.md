@@ -47,5 +47,5 @@ Cathode (short leg) to a current-limiting resistor (usually 220 ohms), then conn
  - Contrast Potentiometer:
  - Connect one outer pin of the potentiometer to 5V and the other outer pin to ground (GND).
 
+![image](https://github.com/ivanprea/dogFeeder/assets/78477048/d39db798-0cf4-4000-bd24-05784a1b07d1)
 
-![Wiring](https://github.com/ivanprea/dogFeeder/assets/78477048/0286765a-400e-4b2f-8d17-e63246a9794c)
