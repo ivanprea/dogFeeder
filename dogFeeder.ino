@@ -5,16 +5,15 @@
 
 // Define the pins for the tilt sensor, LEDs, ultrasonic sensor, and servo motor
 const int tiltSensorPin = 2;        // Digital pin connected to tilt sensor
-const int greenLedPin = 3;          // Pin connected to green LED
-const int redLedPin = 4;            // Pin connected to red LED
+const int greenLedPin = A0;         // Green LED
+const int redLedPin = A1;           // Red LED
+const int whiteLedPin = A2;         // White LED
+const int blueLedPin = A3;          // Blue LED
+const int redAlertPin = A4;         // Red alert LED
 const int ultrasonicTrigPin = 5;    // Ultrasonic sensor TRIG pin
 const int ultrasonicEchoPin = 6;    // Ultrasonic sensor ECHO pin
 const int servoPin = 7;             // Servo motor signal pin
-const int whiteLedPin = A1;         // Pin connected to white LED
-const int contrastPin = A0;         // Potentiometer connected to adjust contrast
-const int blueLedPin = A2;          // Pin connected to blue LED
-const int redAlertPin = A3; // Define pin A3 for red alert LED
-
+const int contrastPin = 1;         // Potentiometer connected to adjust contrast (THIS IS ACTUALLY NOT PLUG BUT WITHOUT DOES NOT WORK XD)
 // Define LCD pins
 const int rs = 8;
 const int en = 9;
@@ -59,28 +58,23 @@ void intLeds() {
   pinMode(whiteLedPin, OUTPUT); // WHITE
   pinMode(blueLedPin, OUTPUT); // BLUE
   pinMode(redAlertPin, OUTPUT); // Alert RED
-  // Turn on blue LED
-  digitalWrite(blueLedPin, HIGH); 
+  digitalWrite(blueLedPin, HIGH); // Turn on blue LED 
 }
 void intServo() {
   pinMode(servoPin, OUTPUT); // Initialize servo pin
-  // Attach servo to its pin
-  servo.attach(servoPin);
-  // Ensure the servo is at 0 degrees on startup
-  servo.write(0);
+  servo.attach(servoPin); // Attach servo to its pin
+  servo.write(0); // Ensure the servo is at 0 degrees on startup
 }
 void intLCD() {
-  // Initialize the LCD with the specified dimensions
-  lcd.begin(lcdColumns, lcdRows);
-  // Set up the contrast pin as an output
-  pinMode(contrastPin, OUTPUT);
-  // Display a message
-  lcd.print("DOG FEEDER  v1.7");
+  lcd.begin(lcdColumns, lcdRows); // Initialize the LCD with the specified dimensions
+  pinMode(contrastPin, OUTPUT);  // Set up the contrast pin as an output
+  lcd.print("DOG FEEDER  v1.7");  // Display a message
 }
 void displayMessage (String message, int column, int line){
      lcd.setCursor(column, line);
-      lcd.print(message);
+     lcd.print(message);
      }
+     
 void loop() {
   // Check if sensor is tilted up (on)
   int sensorValue = digitalRead(tiltSensorPin);
@@ -184,7 +178,7 @@ void loop() {
       delay(300); // Delay for flickering effect
       digitalWrite(redAlertPin, HIGH); // Turn off the red LED
       delay(300); // Delay for flickering effect
-       digitalWrite(redAlertPin, LOW); // Turn off the red LED
+      digitalWrite(redAlertPin, LOW); // Turn off the red LED
       delay(1000); // Delay for flickering effect
     }
   }
