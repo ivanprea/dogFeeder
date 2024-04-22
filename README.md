@@ -45,6 +45,6 @@ Cathode (short leg) to a current-limiting resistor (usually 220 ohms), then conn
  - E pin of the LCD to digital pin 9 (en).
  - D4, D5, D6, and D7 pins to digital pins 10, 11, 12, and 13 respectively (d4, d5, d6, d7).
 
-
+# IMAGE BELOW NOT UPDATED!
 
 ![Wiring](https://github.com/ivanprea/dogFeeder/assets/78477048/dae8bab4-c728-4c62-a735-14b6e8b200c7)
