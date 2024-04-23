@@ -5,11 +5,11 @@
 
 // Define the pins for the tilt sensor, LEDs, ultrasonic sensor, and servo motor
 const int tiltSensorPin = 2;        // Digital pin connected to tilt sensor
-const int greenLedPin = A0;         // Green LED
-const int redLedPin = A1;           // Red LED
-const int whiteLedPin = A2;         // White LED
-const int blueLedPin = A3;          // Blue LED
-const int redAlertPin = A4;         // Red alert LED
+const int greenLedPin = A3;         // Green LED
+const int redLedPin = A2;           // Red LED
+const int whiteLedPin = A0;         // White LED
+const int blueLedPin = A1;          // Blue LED
+const int redAlertPin = A2;         // Red alert LED
 const int ultrasonicTrigPin = 5;    // Ultrasonic sensor TRIG pin
 const int ultrasonicEchoPin = 6;    // Ultrasonic sensor ECHO pin
 const int servoPin = 7;             // Servo motor signal pin
