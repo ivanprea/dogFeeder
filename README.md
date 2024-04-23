@@ -54,6 +54,7 @@ Cathode (short leg) to a current-limiting resistor (usually 220 ohms), then conn
  - D4, D5, D6, and D7 pins to digital pins 10, 11, 12, and 13 respectively (d4, d5, d6, d7).
 
 
-![Schematic V1 8_bb](https://github.com/ivanprea/dogFeeder/assets/78477048/0f1e1fc9-6d3c-4389-ac79-fbcd96cf3e55)
+
+![Schematic V1 8_bb](https://github.com/ivanprea/dogFeeder/assets/78477048/1ba52478-f6a7-4ee3-aa41-5400d878e00f)
 
 
