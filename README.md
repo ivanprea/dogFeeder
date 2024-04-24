@@ -1,3 +1,5 @@
+## This is the schematic and the code for hardware designed to control a dog/cat feeder
+
 # How does it work
 
 ## 1. Initialization: 
